@@ -15,23 +15,25 @@ const TvShowCard = ({ tvShow }) => {
   const [first, second] = tvShow.genre_ids;
 
   return (
-    <div className="lg:w-[11vw] w-[22vw] inline-flex flex-col gap-8 mr-3 lg:mr-5 rounded-xl overflow-hidden cursor-pointer">
+    <div className="lg:w-[11vw] w-[35vw] inline-flex flex-col gap-8 mr-3 lg:mr-5 rounded-xl overflow-hidden cursor-pointer">
       <div className="relative">
         <img
           src={imgUrl}
           alt=""
           className="rounded-xl hover:scale-105 ease-in-out duration-300 "
         />
-        <div className="md:flex hidden absolute right-2 bottom-2 max-w-[60%] items-end justify-end gap-1 flex-wrap">
-          {extractGenres(first, second).map((genre, index) => (
-            <span
-              key={index}
-              className="px-1 py-1 text-xs bg-[#DA2F68] text-white rounded-md"
-            >
-              {genre}
-            </span>
-          ))}
-        </div>
+        {tvShow.genre_ids.length >= 2 && (
+          <div className="md:flex hidden absolute right-2 bottom-2 max-w-[60%] items-end justify-end gap-1 flex-wrap">
+            {extractGenres(first, second).map((genre, index) => (
+              <span
+                key={index}
+                className="px-1 py-1 text-xs bg-[#DA2F68] text-white rounded-md"
+              >
+                {genre}
+              </span>
+            ))}
+          </div>
+        )}
         <div className="lg:w-14 lg:h-14 w-8 h-8 rounded-full flex items-center justify-center absolute bg-white left-2 -bottom-5">
           <div className="relative flex items-center justify-center text-yellow-500">
             <CircularProgress
@@ -48,7 +50,7 @@ const TvShowCard = ({ tvShow }) => {
         </div>
       </div>
       <span>
-        <h2 className="lg:text-lg text-white">{tvShow.name}</h2>
+        <h2 className="lg:text-lg text-sm text-white">{tvShow.name}</h2>
         <h3 className="text-slate-400 text-xs ml-1">
           {dayjs(tvShow.first_air_date).format("MMM D, YYYY")}
         </h3>

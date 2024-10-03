@@ -18,6 +18,24 @@ export const movieApi = createApi({
     getPopularTvs: builder.query({
       query: () => `/tv/popular`,
     }),
+    getSearchedMedia: builder.query({
+      query: ({ search, page }) => `/search/multi?query=${search}&page=${page}`,
+    }),
+    getMovieById: builder.query({
+      query: (id) => `/movie/${id}`,
+    }),
+    getMovieSimilars: builder.query({
+      query: (id) => `/movie/${id}/similar`,
+    }),
+    getMovieRecommendations: builder.query({
+      query: (id) => `/movie/${id}/recommendations`,
+    }),
+    getMovieCredits: builder.query({
+      query: (id) => `movie/${id}/credits`,
+    }),
+    getMovieVideos: builder.query({
+      query: (id) => `movie/${id}/videos`,
+    }),
     getTrendingMovies: builder.query({
       query: (time_window) => `/trending/movie/${time_window}`,
     }),
@@ -32,4 +50,10 @@ export const {
   useGetTrendingMoviesQuery,
   useGetPopularTvsQuery,
   useGetTopRatedQuery,
+  useGetSearchedMediaQuery,
+  useGetMovieByIdQuery,
+  useGetMovieCreditsQuery,
+  useGetMovieVideosQuery,
+  useGetMovieSimilarsQuery,
+  useGetMovieRecommendationsQuery,
 } = movieApi;
