@@ -19,7 +19,7 @@ const MovieCard = ({ movie }) => {
   return (
     <div
       onClick={() => navigate(`/movie/${movie.id}`)}
-      className="lg:w-[15vw] w-[25vw] inline-flex flex-col gap-8 mr-3 lg:mr-5 rounded-xl cursor-pointer"
+      className="lg:w-[15vw] md:w-[30] w-[36vw] inline-flex flex-col gap-8 mr-3 lg:mr-5 rounded-xl cursor-pointer"
     >
       <div className="relative">
         <img

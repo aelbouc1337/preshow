@@ -4,7 +4,7 @@ import MovieCard from "../components/UI/MovieCard";
 import GenreSelect from "../components/UI/GenreSelect";
 
 const Explorer = () => {
-  const [selected, setSelected] = useState(null); // Initialize with null
+  const [selected, setSelected] = useState("28,12"); // Initialize with null
   const [page, setPage] = useState(1);
   const [accumulatedResults, setAccumulatedResults] = useState([]); // State to hold accumulated results
   const observerRef = useRef(); // Reference for the observer
@@ -61,7 +61,7 @@ const Explorer = () => {
   return (
     <div className="w-full my-10 flex flex-col gap-4 px-12 md:px-28 lg:px-[9%] bg-bg">
       <GenreSelect selected={selected} setSelected={setSelected} />
-      <div className="w-full h-full grid gap-8 lg:grid-cols-5 grid-cols-2">
+      <div className="w-full h-full grid gap-2 lg:gap-8 lg:grid-cols-5 grid-cols-2">
         {accumulatedResults?.map((item, index) => (
           <MovieCard key={index} movie={item} />
         ))}
