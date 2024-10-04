@@ -42,6 +42,10 @@ export const movieApi = createApi({
     getTopRated: builder.query({
       query: (category) => `/${category}/top_rated`,
     }),
+    getMoviesByGenre: builder.query({
+      query: ({ genre, page }) =>
+        `/discover/movie?with_genres=${genre}&page=${page}`,
+    }),
   }),
 });
 
@@ -56,4 +60,5 @@ export const {
   useGetMovieVideosQuery,
   useGetMovieSimilarsQuery,
   useGetMovieRecommendationsQuery,
+  useGetMoviesByGenreQuery,
 } = movieApi;

@@ -15,7 +15,7 @@ const TvShowCard = ({ tvShow }) => {
   const [first, second] = tvShow.genre_ids;
 
   return (
-    <div className="lg:w-[11vw] w-[35vw] inline-flex flex-col gap-8 mr-3 lg:mr-5 rounded-xl overflow-hidden cursor-pointer">
+    <div className="lg:w-[15vw] w-[35vw] inline-flex flex-col gap-8 mr-3 lg:mr-5 rounded-xl overflow-hidden cursor-pointer">
       <div className="relative">
         <img
           src={imgUrl}

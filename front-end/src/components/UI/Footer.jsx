@@ -7,14 +7,14 @@ import { FaLinkedin } from "react-icons/fa";
 const Footer = () => {
   return (
     <div className="w-full lg:px-80 px-8 py-14 bg-[#020C1B] text-white flex-col flex gap-6 items-center">
-      <ul className="flex gap-6 justify-center flex-wrap text-xl">
+      <ul className="flex gap-6 justify-center text-sm flex-wrap lg:text-xl">
         <li>Terms Of Use</li>
         <li>Privacy Policy</li>
         <li>About Us</li>
         <li>Blog</li>
         <li>FAQ</li>
       </ul>
-      <p className="text-center text-slate-300">
+      <p className="text-center text-sm text-slate-300">
         Welcome to PreShow, your go-to platform for exploring the latest movie
         trailers. Discover popular, trending, and upcoming films, all in one
         place. With stunning visuals and detailed movie info like cast,

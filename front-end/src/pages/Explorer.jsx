@@ -1,22 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
-import { useGetSearchedMediaQuery } from "../state/api/apiSlice";
+import { useGetMoviesByGenreQuery } from "../state/api/apiSlice";
 import MovieCard from "../components/UI/MovieCard";
-import TvShowCard from "../components/UI/TvShowCard";
+import GenreSelect from "../components/UI/GenreSelect";
 
-const SearchPage = () => {
-  const { search } = useParams();
+const Explorer = () => {
+  const [selected, setSelected] = useState(null); // Initialize with null
   const [page, setPage] = useState(1);
   const [accumulatedResults, setAccumulatedResults] = useState([]); // State to hold accumulated results
   const observerRef = useRef(); // Reference for the observer
 
-  // Fetch data using RTK Query
-  const { data: searchedMedia, isFetching } = useGetSearchedMediaQuery({
-    search,
+  // Fetch data using RTK Query, passing selected genre and page
+  const { data: searchedMedia, isFetching } = useGetMoviesByGenreQuery({
+    genre: selected,
     page,
   });
 
-  // Use effect to accumulate results
+  // Reset accumulated results and page when selected genre changes
+  useEffect(() => {
+    if (selected) {
+      setAccumulatedResults([]); // Clear previous results when genre changes
+      setPage(1); // Reset to first page
+    }
+  }, [selected]); // Ensure this effect only runs when `selected` changes
+
+  // Accumulate results from fetched data
   useEffect(() => {
     if (searchedMedia?.results) {
       setAccumulatedResults((prevResults) => [
@@ -24,7 +31,7 @@ const SearchPage = () => {
         ...searchedMedia.results,
       ]);
     }
-  }, [searchedMedia]);
+  }, [searchedMedia]); // Run when `searchedMedia` updates
 
   // Intersection Observer to trigger loading more data
   useEffect(() => {
@@ -51,26 +58,13 @@ const SearchPage = () => {
     };
   }, [isFetching, searchedMedia]);
 
-  // Filter out only movies or TV shows with a poster path
-  const RenderedArray = accumulatedResults?.filter(
-    (item) =>
-      (item.media_type === "movie" || item.media_type === "tv") &&
-      item.poster_path
-  );
-
   return (
-    <div className="w-full my-10 flex flex-col gap-5 px-12 md:px-28 lg:px-[5%] bg-bg">
-      <h1 className="text-white font-semibold lg:text-2xl text-lg">
-        Search results for "{search}"
-      </h1>
-      <div className="w-full h-full grid gap-3 lg:grid-cols-5 grid-cols-2">
-        {RenderedArray?.map((item, index) =>
-          item.media_type === "movie" ? (
-            <MovieCard key={index} movie={item} />
-          ) : (
-            <TvShowCard key={index} tvShow={item} />
-          )
-        )}
+    <div className="w-full my-10 flex flex-col gap-4 px-12 md:px-28 lg:px-[9%] bg-bg">
+      <GenreSelect selected={selected} setSelected={setSelected} />
+      <div className="w-full h-full grid gap-8 lg:grid-cols-5 grid-cols-2">
+        {accumulatedResults?.map((item, index) => (
+          <MovieCard key={index} movie={item} />
+        ))}
       </div>
       {/* The observer target - this will be observed for the intersection */}
       <div ref={observerRef} className="observer-element w-full h-10"></div>
@@ -83,4 +77,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default Explorer;

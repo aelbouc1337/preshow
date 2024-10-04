@@ -42,7 +42,7 @@ const VideoCard = ({ video }) => {
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          className="absolute w-96 h-64 lg:w-[800px] lg:h-[560px] top-[50%] right-[50%] translate-x-[50%] -translate-y-[50%]"
+          className="absolute w-[90%] h-72 lg:w-[800px] lg:h-[560px] top-[50%] right-[50%] translate-x-[50%] -translate-y-[50%]"
         ></iframe>
       </Modal>
     </div>

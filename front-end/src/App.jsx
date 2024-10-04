@@ -5,6 +5,7 @@ import Navbar from "./components/UI/Navbar.jsx";
 import Footer from "./components/UI/Footer.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
 import BackToTop from "./components/UI/BackToTop.jsx";
+import Explorer from "./pages/Explorer.jsx";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
 
         <Route path="/movie/:id" element={<MoviePage />} />
         <Route path="/search/:search" element={<SearchPage />} />
+        <Route path="/explorer" element={<Explorer />} />
       </Routes>
       <Footer />
     </Router>

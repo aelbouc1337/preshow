@@ -16,10 +16,11 @@ const Header = () => {
       className="relative flex flex-col gap-2 justify-center items-center text-white -mt-[5rem] w-full h-[600px] bg-cover bg-center"
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-bg via-transparent to-transparent h-full"></div>
+      {/* Use z-0 so this background layer doesn't interfere with Navbar */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-bg via-transparent to-transparent h-full"></div>
 
-      <h1 className="font-bold text-5xl lg:text-8xl">Welcome</h1>
-      <h3 className="lg:text-2xl text-center ">
+      <h1 className="font-bold text-5xl lg:text-8xl z-10">Welcome</h1>
+      <h3 className="lg:text-2xl text-center z-10">
         Millions of movies, TV shows and people to discover. Explore Now.
       </h3>
       <SearchBar />

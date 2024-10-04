@@ -5,7 +5,7 @@ const PersonCard = ({ person }) => {
   const imgUrl = `https://image.tmdb.org/t/p/w1280${person?.profile_path}`;
   return (
     <div className="flex items-center flex-col">
-      <div className="w-24 h-24 lg:w-56 lg:h-56 rounded-full overflow-hidden">
+      <div className="w-36 h-36 lg:w-56 lg:h-56 rounded-full overflow-hidden">
         {person?.profile_path ? (
           <img src={imgUrl} className="w-full h-full" alt="" />
         ) : (

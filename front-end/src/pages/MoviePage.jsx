@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   useGetMovieByIdQuery,
@@ -41,6 +41,17 @@ const MoviePage = () => {
   const posterUrl = `https://image.tmdb.org/t/p/w1280${movie?.poster_path}`;
 
   const year = dayjs(movie?.release_date).format("YYYY");
+
+  useEffect(() => {
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    };
+
+    scrollToTop();
+  });
 
   return (
     <div className="w-full h-full">
