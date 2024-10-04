@@ -71,7 +71,7 @@ const TrendingMovies = () => {
       <div className="relative flex gap-3 items-center">
         <div
           onClick={slideLeft}
-          className="absolute z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white opacity-40 hover:opacity-80 cursor-pointer flex items-center justify-center"
+          className="absolute z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white cursor-pointer flex items-center justify-center"
         >
           <MdChevronLeft />
         </div>
@@ -94,7 +94,7 @@ const TrendingMovies = () => {
         )}
         <div
           onClick={slideRight}
-          className="absolute right-0 z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white opacity-40 hover:opacity-80 cursor-pointer flex items-center justify-center"
+          className="absolute right-0 z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white cursor-pointer flex items-center justify-center"
         >
           <MdChevronRight />
         </div>

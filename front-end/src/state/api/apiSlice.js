@@ -24,18 +24,34 @@ export const movieApi = createApi({
     getMovieById: builder.query({
       query: (id) => `/movie/${id}`,
     }),
+    getTvShowById: builder.query({
+      query: (id) => `/tv/${id}`,
+    }),
     getMovieSimilars: builder.query({
       query: (id) => `/movie/${id}/similar`,
+    }),
+    getTvShowSimilars: builder.query({
+      query: (id) => `/tv/${id}/similar`,
     }),
     getMovieRecommendations: builder.query({
       query: (id) => `/movie/${id}/recommendations`,
     }),
+    getTvShowRecommendations: builder.query({
+      query: (id) => `/tv/${id}/recommendations`,
+    }),
     getMovieCredits: builder.query({
       query: (id) => `movie/${id}/credits`,
+    }),
+    getTvShowCredits: builder.query({
+      query: (id) => `tv/${id}/credits`,
     }),
     getMovieVideos: builder.query({
       query: (id) => `movie/${id}/videos`,
     }),
+    gettvShowVideos: builder.query({
+      query: (id) => `tv/${id}/videos`,
+    }),
+
     getTrendingMovies: builder.query({
       query: (time_window) => `/trending/movie/${time_window}`,
     }),
@@ -43,8 +59,10 @@ export const movieApi = createApi({
       query: (category) => `/${category}/top_rated`,
     }),
     getMoviesByGenre: builder.query({
-      query: ({ genre, page }) =>
-        `/discover/movie?with_genres=${genre}&page=${page}`,
+      query: ({ genre, page, sortBy }) =>
+        `/discover/movie?with_genres=${genre}&page=${page}&sort_by=${
+          sortBy ? sortBy : "popularity.desc"
+        }`,
     }),
   }),
 });
@@ -61,4 +79,9 @@ export const {
   useGetMovieSimilarsQuery,
   useGetMovieRecommendationsQuery,
   useGetMoviesByGenreQuery,
+  useGetTvShowByIdQuery,
+  useGetTvShowCreditsQuery,
+  useGettvShowVideosQuery,
+  useGetTvShowSimilarsQuery,
+  useGetTvShowRecommendationsQuery,
 } = movieApi;

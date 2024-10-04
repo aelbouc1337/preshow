@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import CircularProgress from "@mui/material/CircularProgress";
 import { genreList } from "../../utils/genresList";
 import { useNavigate } from "react-router-dom";
+import { FaPhotoVideo } from "react-icons/fa";
 
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
@@ -19,14 +20,21 @@ const MovieCard = ({ movie }) => {
   return (
     <div
       onClick={() => navigate(`/movie/${movie.id}`)}
-      className="lg:w-[15vw] md:w-[30] w-[36vw] inline-flex flex-col gap-8 mr-3 lg:mr-5 rounded-xl cursor-pointer"
+      className="lg:w-[15vw] md:w-[30vw] w-[42vw] inline-flex flex-col mr-3 gap-8 lg:mr-5 rounded-xl cursor-pointer"
     >
       <div className="relative">
-        <img
-          src={imgUrl}
-          alt="No photo Here"
-          className="rounded-xl text-white hover:scale-105 ease-in-out duration-300 "
-        />
+        {movie?.poster_path ? (
+          <img
+            src={imgUrl}
+            alt="No photo Here"
+            className="rounded-xl text-white hover:scale-105 ease-in-out duration-300 "
+          />
+        ) : (
+          <div className="w-full lg:h-[425px] py-16 text-blue-500 rounded-xl  bg-gradient-to-b from-[#173D77] to-[#03102c] flex flex-col items-center justify-center">
+            <FaPhotoVideo size={80} />
+            <h4 className="text-xl">No Poster</h4>
+          </div>
+        )}
         {movie.genre_ids.length >= 2 && (
           <div className="md:flex hidden absolute right-2 bottom-2 max-w-[60%] items-end justify-end gap-1 flex-wrap">
             {extractGenres(first, second).map((genre, index) => (

@@ -25,7 +25,7 @@ const Navbar = () => {
       {searchOpen && (
         <form
           onSubmit={handleSumbit}
-          className="absolute lg:top-20 lg:right-96 w-full lg:w-[40%] translate-x-[25%] lg:px-20 px-10 border text-white border-slate-500 rounded-full bg-slate-700 flex items-center justify-center gap-9"
+          className="absolute lg:top-20 top-16 lg:right-96 w-full lg:w-[40%] lg:translate-x-[25%] lg:px-20 px-10 border text-white border-slate-500 rounded-full bg-slate-700 flex items-center justify-center gap-9"
         >
           <input
             onChange={(e) => setSearch(e.target.value)}
@@ -52,12 +52,6 @@ const Navbar = () => {
         <li className="w-full h-full flex items-center justify-center border-slate-500 border-b py-4 px-4 text-white text-xl">
           TV Shows
         </li>
-        <li
-          onClick={() => setSearchOpen(true)}
-          className="w-full h-full flex items-center justify-center border-slate-500 border-b py-4 px-4 text-white text-xl"
-        >
-          Search
-        </li>
         <li className="w-full h-full flex items-center justify-center border-slate-500 py-4 px-4 text-white text-xl">
           Profile
         </li>
@@ -65,7 +59,7 @@ const Navbar = () => {
 
       <div className="lg:px-[18%] px-6 py-4 flex justify-between w-full">
         <img
-          onClick={nav}
+          onClick={() => navigate("/")}
           src="/preshow-logo.png"
           width={200}
           alt="Logo"
@@ -83,11 +77,19 @@ const Navbar = () => {
         </ul>
 
         {/* Menu toggle button for mobile */}
-        <div
-          className="text-white lg:hidden cursor-pointer"
-          onClick={() => setMenu(!menu)}
-        >
-          <CiMenuFries size={30} />
+        <div className="flex gap-2 items-center justify-center">
+          <div
+            onClick={() => setSearchOpen(true)}
+            className="flex items-center text-white justify-center lg:hidden"
+          >
+            <CiSearch size={30} />
+          </div>
+          <div
+            className="text-white lg:hidden cursor-pointer"
+            onClick={() => setMenu(!menu)}
+          >
+            <CiMenuFries size={30} />
+          </div>
         </div>
       </div>
     </nav>

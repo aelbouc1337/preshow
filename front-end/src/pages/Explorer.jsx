@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useGetMoviesByGenreQuery } from "../state/api/apiSlice";
 import MovieCard from "../components/UI/MovieCard";
 import GenreSelect from "../components/UI/GenreSelect";
+import SortSelect from "../components/UI/SortSelect";
 
 const Explorer = () => {
   const [selected, setSelected] = useState("28,12"); // Initialize with null
+  const [selectedSort, setSelectedSort] = useState(null);
+
   const [page, setPage] = useState(1);
   const [accumulatedResults, setAccumulatedResults] = useState([]); // State to hold accumulated results
   const observerRef = useRef(); // Reference for the observer
@@ -13,15 +16,16 @@ const Explorer = () => {
   const { data: searchedMedia, isFetching } = useGetMoviesByGenreQuery({
     genre: selected,
     page,
+    sortBy: selectedSort,
   });
 
   // Reset accumulated results and page when selected genre changes
   useEffect(() => {
-    if (selected) {
+    if (selected || selectedSort) {
       setAccumulatedResults([]); // Clear previous results when genre changes
       setPage(1); // Reset to first page
     }
-  }, [selected]); // Ensure this effect only runs when `selected` changes
+  }, [selected, selectedSort]); // Ensure this effect only runs when `selected` changes
 
   // Accumulate results from fetched data
   useEffect(() => {
@@ -59,9 +63,15 @@ const Explorer = () => {
   }, [isFetching, searchedMedia]);
 
   return (
-    <div className="w-full my-10 flex flex-col gap-4 px-12 md:px-28 lg:px-[9%] bg-bg">
-      <GenreSelect selected={selected} setSelected={setSelected} />
-      <div className="w-full h-full grid gap-2 lg:gap-8 lg:grid-cols-5 grid-cols-2">
+    <div className="w-full my-10 justify-centers items-center flex flex-col gap-4 px-4 md:px-28 lg:px-[9%] bg-bg">
+      <div className="w-full items-end flex flex-col lg:flex-row gap-3 border">
+        <GenreSelect selected={selected} setSelected={setSelected} />
+        <SortSelect
+          selectedSort={selectedSort}
+          setSelectedSort={setSelectedSort}
+        />
+      </div>
+      <div className="w-full h-full  grid lg:gap-8 lg:grid-cols-5 grid-cols-2">
         {accumulatedResults?.map((item, index) => (
           <MovieCard key={index} movie={item} />
         ))}

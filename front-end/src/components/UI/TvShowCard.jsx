@@ -2,8 +2,10 @@ import React from "react";
 import dayjs from "dayjs";
 import CircularProgress from "@mui/material/CircularProgress";
 import { genreList } from "../../utils/genresList";
+import { useNavigate } from "react-router-dom";
 
 const TvShowCard = ({ tvShow }) => {
+  const navigate = useNavigate();
   const imgUrl = `https://image.tmdb.org/t/p/w1280${tvShow.poster_path}`;
 
   const extractGenres = (first, second) => {
@@ -15,7 +17,10 @@ const TvShowCard = ({ tvShow }) => {
   const [first, second] = tvShow.genre_ids;
 
   return (
-    <div className="lg:w-[15vw] w-[35vw] inline-flex flex-col gap-8 mr-3 lg:mr-5 rounded-xl overflow-hidden cursor-pointer">
+    <div
+      onClick={() => navigate(`/tv/${tvShow?.id}`)}
+      className="lg:w-[15vw] md:w-[30vw] w-[42vw] inline-flex flex-col gap-8 mr-3 lg:mr-5 rounded-xl overflow-hidden cursor-pointer"
+    >
       <div className="relative">
         <img
           src={imgUrl}

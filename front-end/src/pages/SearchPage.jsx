@@ -59,11 +59,11 @@ const SearchPage = () => {
   );
 
   return (
-    <div className="w-full my-10 flex flex-col gap-5 px-12 md:px-28 lg:px-[5%] bg-bg">
+    <div className="w-full my-10 flex flex-col gap-5 ml-3 md:px-28 lg:px-[5%] bg-bg">
       <h1 className="text-white font-semibold lg:text-2xl text-lg">
         Search results for "{search}"
       </h1>
-      <div className="w-full h-full grid gap-3 lg:grid-cols-5 grid-cols-2">
+      <div className="w-full h-full grid gap-y-5 lg:grid-cols-5 grid-cols-2">
         {RenderedArray?.map((item, index) =>
           item.media_type === "movie" ? (
             <MovieCard key={index} movie={item} />

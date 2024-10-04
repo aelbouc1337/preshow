@@ -4,6 +4,9 @@ import {
   useGetMovieByIdQuery,
   useGetMovieCreditsQuery,
   useGetMovieVideosQuery,
+  useGetTvShowByIdQuery,
+  useGetTvShowCreditsQuery,
+  useGettvShowVideosQuery,
 } from "../state/api/apiSlice";
 import dayjs from "dayjs";
 import { CircularProgress } from "@mui/material";
@@ -11,7 +14,8 @@ import { CiPlay1 } from "react-icons/ci";
 import PersonCard from "../components/UI/PersonCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import VideoCard from "../components/UI/VideoCard";
-import MovieSimilarAndRecommendations from "../components/Movie Similar Recommendations";
+import SimilarAndRecommendations from "../components/Movie Similar Recommendations";
+import TVSimilarAndRecommendations from "../components/Tv Similar Recommendations";
 
 export const slideLeft = (id) => {
   const slider = document.getElementById(id);
@@ -23,11 +27,11 @@ export const slideRight = (id) => {
   slider.scrollLeft = slider.scrollLeft + 800;
 };
 
-const MoviePage = () => {
+const TvShowPage = () => {
   const { id } = useParams();
-  const { data: movie } = useGetMovieByIdQuery(id);
-  const { data: movieCredits } = useGetMovieCreditsQuery(id);
-  const { data: movieVideos } = useGetMovieVideosQuery(id);
+  const { data: movie } = useGetTvShowByIdQuery(id);
+  const { data: movieCredits } = useGetTvShowCreditsQuery(id);
+  const { data: movieVideos } = useGettvShowVideosQuery(id);
 
   const director = movieCredits?.crew.find(
     (crewMember) => crewMember.job === "Director"
@@ -40,7 +44,7 @@ const MoviePage = () => {
   const backdropUrl = `https://image.tmdb.org/t/p/w1280${movie?.backdrop_path}`;
   const posterUrl = `https://image.tmdb.org/t/p/w1280${movie?.poster_path}`;
 
-  const year = dayjs(movie?.release_date).format("YYYY");
+  const year = dayjs(movie?.first_air_date).format("YYYY");
 
   useEffect(() => {
     const scrollToTop = () => {
@@ -71,11 +75,8 @@ const MoviePage = () => {
             <div className="flex flex-col justify-center gap-4 p-1">
               <div>
                 <h2 className="lg:text-4xl text-xl">
-                  {movie?.title} [{year}]
+                  {movie?.name} [{year}]
                 </h2>
-                <h4 className="text-slate-500 text-sm lg:text-xl">
-                  {movie?.tagline}
-                </h4>
               </div>
 
               <ul className="flex gap-1">
@@ -129,13 +130,13 @@ const MoviePage = () => {
                     Release Date:
                   </span>
                   <span className="text-slate-500 md:ml-3">
-                    {movie?.release_date}
+                    {movie?.first_air_date}
                   </span>
                 </div>
                 <div className="md:ml-12 flex flex-wrap">
-                  <span className="text-white font-semibold">Runtime:</span>
+                  <span className="text-white font-semibold">Seasons:</span>
                   <span className="text-slate-500 md:ml-3">
-                    {movie?.runtime} minutes
+                    {movie?.seasons.length}
                   </span>
                 </div>
               </section>
@@ -186,15 +187,12 @@ const MoviePage = () => {
         </div>
       </header>
 
-      {/* Official Videos section */}
       {movieVideos?.results.length != 0 && (
         <section className="w-full px-6 lg:px-[18%]">
           <h2 className="lg:text-2xl font-semibold text-white">
             Official Videos
           </h2>
           <div className="relative flex gap-3 items-center mt-4">
-            {" "}
-            {/* Added margin-top */}
             <div
               id="videos"
               className="w-full flex gap-7 h-full overflow-x-scroll scrollbar-hide whitespace-nowrap scroll-smooth"
@@ -206,7 +204,6 @@ const MoviePage = () => {
                 <MdChevronLeft size={30} />
               </div>
 
-              {/* Render video cards here */}
               {movieVideos?.results?.map((video, index) => (
                 <VideoCard key={index} video={video} />
               ))}
@@ -225,17 +222,17 @@ const MoviePage = () => {
       <section className="w-full my-6 px-6 lg:px-[18%]">
         <h2 className="lg:text-2xl font-semibold text-white">Similar Movies</h2>
 
-        <MovieSimilarAndRecommendations id={id} cat="similar" />
+        <TVSimilarAndRecommendations id={id} cat="similar" />
       </section>
       <section className="w-full my-6 px-6 lg:px-[18%]">
         <h2 className="lg:text-2xl font-semibold text-white">
           Recommendations
         </h2>
 
-        <MovieSimilarAndRecommendations id={id} cat="recommendations" />
+        <TVSimilarAndRecommendations id={id} cat="recommendations" />
       </section>
     </div>
   );
 };
 
-export default MoviePage;
+export default TvShowPage;
