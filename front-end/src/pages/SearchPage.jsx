@@ -21,7 +21,7 @@ const SearchPage = () => {
     if (searchedMedia?.results) {
       setAccumulatedResults((prevResults) => [
         ...prevResults,
-        ...searchedMedia.results,
+        ...searchedMedia?.results,
       ]);
     }
   }, [searchedMedia]);
@@ -64,13 +64,14 @@ const SearchPage = () => {
         Search results for "{search}"
       </h1>
       <div className="w-full h-full grid gap-y-5 lg:grid-cols-5 grid-cols-2">
-        {RenderedArray?.map((item, index) =>
-          item.media_type === "movie" ? (
-            <MovieCard key={index} movie={item} />
-          ) : (
-            <TvShowCard key={index} tvShow={item} />
-          )
-        )}
+        {RenderedArray &&
+          RenderedArray?.map((item, index) =>
+            item.media_type === "movie" ? (
+              <MovieCard key={index} movie={item} />
+            ) : (
+              <TvShowCard key={index} tvShow={item} />
+            )
+          )}
       </div>
       {/* The observer target - this will be observed for the intersection */}
       <div ref={observerRef} className="observer-element w-full h-10"></div>
