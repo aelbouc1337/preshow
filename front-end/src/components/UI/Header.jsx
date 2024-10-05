@@ -14,7 +14,7 @@ const Header = () => {
   const imgUrl = `https://image.tmdb.org/t/p/w1280${imgName}`; //Forming the URL Based on the backdrop-path
   return (
     <header
-      className="relative flex flex-col gap-2 justify-center items-center text-white -mt-[5rem] w-full h-[600px] bg-cover bg-center"
+      className="relative flex flex-col gap-4 justify-center items-center text-white -mt-[5rem] w-full h-[600px] bg-cover bg-center"
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
       {/* Use z-0 so this background layer doesn't interfere with Navbar */}
