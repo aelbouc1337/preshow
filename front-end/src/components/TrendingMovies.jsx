@@ -35,7 +35,9 @@ const TrendingMovies = () => {
   return (
     <div className="w-full my-10 flex flex-col gap-4 px-4 md:px-12 lg:px-[18%] bg-bg">
       <div className="w-full h-full flex justify-between">
-        <h2 className=" text-white font-semibold text-2xl">Trending</h2>
+        <h2 className=" text-white font-semibold text-lg lg:text-2xl">
+          Trending
+        </h2>
         <div className="rounded-full flex p-[2px] bg-white overflow-hidden text-sm">
           <span
             onClick={() => handleTrendingPeriodChange("day")}

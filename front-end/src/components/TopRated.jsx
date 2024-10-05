@@ -36,11 +36,13 @@ const TopRated = () => {
   return (
     <div className="w-full my-16 flex flex-col gap-4 px-4 md:px-12 lg:px-[18%] bg-bg">
       <div className="w-full h-full flex justify-between">
-        <h2 className=" text-white font-semibold text-2xl">Top Rated</h2>
+        <h2 className=" text-white font-semibold text-lg lg:text-2xl">
+          Top Rated
+        </h2>
         <div className="rounded-full flex p-[2px] bg-white overflow-hidden text-sm">
           <span
             onClick={() => handleCategoryChange("movie")}
-            className={`px-6 py-1 cursor-pointer rounded-full ${
+            className={`px-6 py-1 flex items-center justify-center cursor-pointer rounded-full ${
               category === "movie"
                 ? "text-white bg-gradient-to-r from-orange-500 to bg-pink-600"
                 : "text-black bg-white"
@@ -50,7 +52,7 @@ const TopRated = () => {
           </span>
           <span
             onClick={() => handleCategoryChange("tv")}
-            className={`px-4 py-1 cursor-pointer rounded-full ${
+            className={`px-4 py-1 flex items-center justify-center cursor-pointer rounded-full ${
               category === "tv"
                 ? "text-white bg-gradient-to-r from-orange-500 to bg-pink-600"
                 : "text-black bg-white"
