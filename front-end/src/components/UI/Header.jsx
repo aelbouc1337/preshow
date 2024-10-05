@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { useGetTrendingMoviesQuery } from "../../state/api/apiSlice";
+import {
+  useGetTrendingMoviesQuery,
+  useGetTopRatedQuery,
+} from "../../state/api/apiSlice";
 import SearchBar from "../SearchBar";
 
 const Header = () => {
   function getRandomInt(length) {
     return Math.floor(Math.random() * length) + 1;
   }
-  const { data: trendingMovies } = useGetTrendingMoviesQuery("day");
+  const { data: trendingMovies } = useGetTopRatedQuery("movie");
   const imgName =
     trendingMovies?.results[getRandomInt(trendingMovies?.results.length)]
       ?.backdrop_path; // getting backDrops Randomly from trending Movies
