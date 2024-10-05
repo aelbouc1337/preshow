@@ -4,6 +4,7 @@ import TvShowCard from "./UI/TvShowCard";
 import { useGetTopRatedQuery } from "../state/api/apiSlice";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import Skeleton from "./UI/Skeleton"; // Import Skeleton loader
+import { slideLeft, slideRight } from "../utils/sliders";
 
 const TopRated = () => {
   const [category, setCategory] = useState("movie");
@@ -30,17 +31,7 @@ const TopRated = () => {
     }
   }, [isUpdating]);
 
-  const slideLeft = () => {
-    const slider = document.getElementById("topRatedSlider");
-    slider.scrollLeft = slider.scrollLeft - 500;
-  };
-
-  const slideRight = () => {
-    const slider = document.getElementById("topRatedSlider");
-    slider.scrollLeft = slider.scrollLeft + 500;
-  };
-
-  const skeletonArray = Array(5).fill(0); // Create an array to map for Skeletons
+  const skeletonArray = Array(4).fill(0); // Create an array to map for Skeletons
 
   return (
     <div className="w-full my-16 flex flex-col gap-4 px-4 md:px-12 lg:px-[18%] bg-bg">
@@ -72,7 +63,7 @@ const TopRated = () => {
 
       <div className="relative flex gap-3 items-center">
         <div
-          onClick={slideLeft}
+          onClick={() => slideLeft("topRatedSlider")}
           className="absolute z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white  cursor-pointer flex items-center justify-center"
         >
           <MdChevronLeft />
@@ -102,7 +93,7 @@ const TopRated = () => {
         )}
 
         <div
-          onClick={slideRight}
+          onClick={() => slideRight("topRatedSlider")}
           className="absolute right-0 z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white  cursor-pointer flex items-center justify-center"
         >
           <MdChevronRight />

@@ -1,19 +1,13 @@
 import React from "react";
 import dayjs from "dayjs";
 import CircularProgress from "@mui/material/CircularProgress";
-import { genreList } from "../../utils/genresList";
 import { useNavigate } from "react-router-dom";
+import { extractGenres } from "./MovieCard";
 
 const TvShowCard = ({ tvShow }) => {
   const navigate = useNavigate();
   const imgUrl = `https://image.tmdb.org/t/p/w1280${tvShow.poster_path}`;
 
-  const extractGenres = (first, second) => {
-    const firstGenre = genreList[first];
-    const secondGenre = genreList[second];
-
-    return [firstGenre, secondGenre];
-  };
   const [first, second] = tvShow.genre_ids;
 
   return (

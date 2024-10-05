@@ -4,8 +4,8 @@ import { FaPhotoVideo } from "react-icons/fa";
 const PersonCard = ({ person }) => {
   const imgUrl = `https://image.tmdb.org/t/p/w1280${person?.profile_path}`;
   return (
-    <div className="flex items-center flex-col">
-      <div className="w-36 h-36 lg:w-56 lg:h-56 rounded-full overflow-hidden">
+    <div className="flex items-center flex-col cursor-pointer hover:scale-105 transition-all ease-in-out duration-300">
+      <div className="w-36 h-36 lg:w-48 lg:h-48 rounded-full overflow-hidden">
         {person?.profile_path ? (
           <img src={imgUrl} className="w-full h-full" alt="" />
         ) : (

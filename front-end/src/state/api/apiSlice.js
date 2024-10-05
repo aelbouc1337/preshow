@@ -1,13 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhY2IxMGY2ZGUzMDBjNmFmNjAyZTc2Yzk5Yzg3MTkyMiIsIm5iZiI6MTcyNzYzMDg0My4zMzA2Nywic3ViIjoiNjZmODFmYzcxYTljOTE4OGZlY2MyMDhhIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.Ho58wABDNhmkSdwamoDewid98XWuEK5X9Oa7gQ6QKHY";
 export const movieApi = createApi({
   reducerPath: "movieApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.themoviedb.org/3",
     prepareHeaders: (headers, { getState }) => {
-      headers.set("Authorization", `Bearer ${token}`);
+      headers.set("Authorization", `Bearer ${import.meta.env.VITE_TOKEN}`);
       return headers;
     },
   }),
@@ -64,6 +62,12 @@ export const movieApi = createApi({
           sortBy ? sortBy : "popularity.desc"
         }`,
     }),
+    getTvsByGenre: builder.query({
+      query: ({ genre, page, sortBy }) =>
+        `/discover/tv?with_genres=${genre}&page=${page}&sort_by=${
+          sortBy ? sortBy : "popularity.desc"
+        }`,
+    }),
   }),
 });
 
@@ -84,4 +88,5 @@ export const {
   useGettvShowVideosQuery,
   useGetTvShowSimilarsQuery,
   useGetTvShowRecommendationsQuery,
+  useGetTvsByGenreQuery,
 } = movieApi;

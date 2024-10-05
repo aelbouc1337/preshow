@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
-  useGetMovieByIdQuery,
-  useGetMovieCreditsQuery,
-  useGetMovieVideosQuery,
   useGetTvShowByIdQuery,
   useGetTvShowCreditsQuery,
   useGettvShowVideosQuery,
@@ -14,7 +11,6 @@ import { CiPlay1 } from "react-icons/ci";
 import PersonCard from "../components/UI/PersonCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import VideoCard from "../components/UI/VideoCard";
-import SimilarAndRecommendations from "../components/Movie Similar Recommendations";
 import TVSimilarAndRecommendations from "../components/Tv Similar Recommendations";
 
 export const slideLeft = (id) => {

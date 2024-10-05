@@ -4,13 +4,11 @@ import { CiPlay1 } from "react-icons/ci";
 import Backdrop from "@mui/material/Backdrop";
 
 const VideoCard = ({ video }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // state of modal
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div className="flex flex-col items-center w-72">
-      {" "}
-      {/* Increase width and adjust layout */}
+    <div className="flex flex-col items-center w-72 ">
       <div onClick={handleOpen} className="relative cursor-pointer w-64 h-52">
         <img
           src={`https://img.youtube.com/vi/${video?.key}/0.jpg`}

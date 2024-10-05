@@ -5,22 +5,27 @@ import { genreList } from "../../utils/genresList";
 import { useNavigate } from "react-router-dom";
 import { FaPhotoVideo } from "react-icons/fa";
 
-const MovieCard = ({ movie }) => {
-  const navigate = useNavigate();
-  const imgUrl = `https://image.tmdb.org/t/p/w1280${movie.poster_path}`;
 
-  const extractGenres = (first, second) => {
+
+  // this function take genre id's and return the genre name based on the genreList Array
+  export const extractGenres = (first, second) => {
     const firstGenre = genreList[first];
     const secondGenre = genreList[second];
 
     return [firstGenre, secondGenre];
   };
-  const [first, second] = movie.genre_ids;
+const MovieCard = ({ movie }) => {
+  const navigate = useNavigate();
+  const imgUrl = `https://image.tmdb.org/t/p/w1280${movie.poster_path}`;
+
+
+
+  const [first, second] = movie.genre_ids; // destructing two first genres from the movie to display them on the card
 
   return (
     <div
       onClick={() => navigate(`/movie/${movie.id}`)}
-      className="lg:w-[15vw] md:w-[30vw] w-[42vw] inline-flex flex-col mr-3 gap-8 lg:mr-5 rounded-xl cursor-pointer"
+      className="lg:w-[15vw] md:w-[30vw] w-[44vw] inline-flex flex-col mr-3 gap-8 lg:mr-5 rounded-xl cursor-pointer"
     >
       <div className="relative">
         {movie?.poster_path ? (

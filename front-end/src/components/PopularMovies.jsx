@@ -7,21 +7,22 @@ import {
 } from "../state/api/apiSlice";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import Skeleton from "./UI/Skeleton";
+import { slideLeft, slideRight } from "../utils/sliders";
 
 const PopularMovies = () => {
-  const [category, setCategory] = useState("movies");
-  const [isUpdating, setIsUpdating] = useState(false);
+  const [category, setCategory] = useState("movies"); // there is two categories , movies and tvShows.
+  const [isUpdating, setIsUpdating] = useState(false); // state for loading when toogling between movies and tvShows
   const { data: PopularMovies } = useGetPopularMoviesQuery();
   const { data: PopularTvs } = useGetPopularTvsQuery();
 
-  let results;
+  let results; // declaring a variable and assigning data based on the categorie selected
   if (category === "movies") {
     results = PopularMovies ? PopularMovies.results : [];
   } else {
     results = PopularTvs ? PopularTvs.results : [];
   }
 
-  // Temporary state update to trigger Skeleton loader for 1 second
+  // Temporary state update to trigger Skeleton loader for a while
   useEffect(() => {
     if (isUpdating) {
       const timer = setTimeout(() => {
@@ -31,17 +32,6 @@ const PopularMovies = () => {
     }
   }, [isUpdating]);
 
-  // Using the Arrows to Slide left and Right Smoothly
-  const slideLeft = () => {
-    const slider = document.getElementById("popularSlider");
-    slider.scrollLeft = slider.scrollLeft - 500;
-  };
-
-  const slideRight = () => {
-    const slider = document.getElementById("popularSlider");
-    slider.scrollLeft = slider.scrollLeft + 500;
-  };
-
   // Handle category change and trigger temporary updating state
   const handleCategoryChange = (newCategory) => {
     if (category !== newCategory) {
@@ -50,7 +40,7 @@ const PopularMovies = () => {
     }
   };
 
-  const arr = ["a", "b", "c", "d", 1]; // Placeholder array for Skeleton
+  const arr = Array(4).fill(0); // Create an array to map for Skeletons
 
   return (
     <div className="w-full my-16 flex flex-col gap-4 px-4 md:px-12 lg:px-[18%] bg-bg">
@@ -82,7 +72,7 @@ const PopularMovies = () => {
 
       <div className="relative flex gap-3 items-center">
         <div
-          onClick={slideLeft}
+          onClick={() => slideLeft("popularSlider")}
           className="absolute z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white  cursor-pointer flex items-center justify-center"
         >
           <MdChevronLeft />
@@ -112,7 +102,7 @@ const PopularMovies = () => {
         )}
 
         <div
-          onClick={slideRight}
+          onClick={() => slideRight("popularSlider")}
           className="absolute right-0 z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white cursor-pointer flex items-center justify-center"
         >
           <MdChevronRight />

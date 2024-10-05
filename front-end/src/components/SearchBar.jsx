@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(""); // accumulating the text on the search bar
   const navigate = useNavigate();
 
   const handleChange = (e) => {

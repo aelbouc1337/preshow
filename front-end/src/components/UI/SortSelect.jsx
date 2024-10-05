@@ -27,7 +27,7 @@ export default function SortSelect({ selectedSort, setSelectedSort }) {
       onChange={setSelectedSort}
     >
       <div className="relative w-full">
-        <ListboxButton className="relative lg:w-[60%] w-full cursor-default rounded-md bg-transparent border border-slate-500 py-3 pl-3 pr-10 text-left text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+        <ListboxButton className="relative w-full lg:w-[50%] cursor-default rounded-full bg-transparent border-slate-500 py-3 pl-3 pr-10 text-left text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
           <span className="flex items-center">
             <span className="ml-3 block text-white truncate">
               {selectedOption ? selectedOption.name : "Sort By"}
@@ -43,7 +43,7 @@ export default function SortSelect({ selectedSort, setSelectedSort }) {
 
         <ListboxOptions
           transition
-          className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-gray-700 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
+          className="absolute z-10 mt-1 max-h-56 w-full lg:w-[50%] overflow-auto rounded-md bg-gray-700 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
         >
           {sortOptions.map((option) => (
             <ListboxOption

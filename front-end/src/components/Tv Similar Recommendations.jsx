@@ -1,5 +1,5 @@
 import React from "react";
-import { slideLeft, slideRight } from "../pages/MoviePage";
+import { slideLeft, slideRight } from "../utils/sliders";
 import {
   useGetTvShowSimilarsQuery,
   useGetTvShowRecommendationsQuery,

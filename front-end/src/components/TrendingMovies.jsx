@@ -3,6 +3,7 @@ import MovieCard from "./UI/MovieCard";
 import { useGetTrendingMoviesQuery } from "../state/api/apiSlice";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import Skeleton from "./UI/Skeleton";
+import { slideLeft, slideRight } from "../utils/sliders";
 
 const TrendingMovies = () => {
   const [TrendingPeriod, setTrendingPeriod] = useState("day");
@@ -21,16 +22,6 @@ const TrendingMovies = () => {
     }
   }, [isLoading, isUpdating]);
 
-  // Using the Arrows to Slide left and Right Smoothly
-  const slideLeft = () => {
-    const slider = document.getElementById("trendingSlider");
-    slider.scrollLeft = slider.scrollLeft - 500;
-  };
-  const slideRight = () => {
-    const slider = document.getElementById("trendingSlider");
-    slider.scrollLeft = slider.scrollLeft + 500;
-  };
-
   // Change TrendingPeriod and trigger temporary updating state
   const handleTrendingPeriodChange = (period) => {
     if (TrendingPeriod !== period) {
@@ -39,7 +30,7 @@ const TrendingMovies = () => {
     }
   };
 
-  const arr = ["a", "b", "c", "d", 1];
+  const arr = Array(4).fill(0); // Create an array to map for Skeletons
 
   return (
     <div className="w-full my-10 flex flex-col gap-4 px-4 md:px-12 lg:px-[18%] bg-bg">
@@ -70,7 +61,7 @@ const TrendingMovies = () => {
       </div>
       <div className="relative flex gap-3 items-center">
         <div
-          onClick={slideLeft}
+          onClick={() => slideLeft("trendingSlider")}
           className="absolute z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white cursor-pointer flex items-center justify-center"
         >
           <MdChevronLeft />
@@ -93,7 +84,7 @@ const TrendingMovies = () => {
           </div>
         )}
         <div
-          onClick={slideRight}
+          onClick={() => slideRight("trendingSlider")}
           className="absolute right-0 z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white cursor-pointer flex items-center justify-center"
         >
           <MdChevronRight />

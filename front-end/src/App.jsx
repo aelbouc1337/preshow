@@ -5,8 +5,8 @@ import Navbar from "./components/UI/Navbar.jsx";
 import Footer from "./components/UI/Footer.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
 import BackToTop from "./components/UI/BackToTop.jsx";
-import Explorer from "./pages/Explorer.jsx";
 import TvShowPage from "./pages/TvShowPage.jsx";
+import MoviesExplorer from "./pages/MoviesExplorer.jsx";
 
 const App = () => {
   return (
@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/tv/:id" element={<TvShowPage />} />
 
         <Route path="/search/:search" element={<SearchPage />} />
-        <Route path="/explorer" element={<Explorer />} />
+        <Route path="/explorer" element={<MoviesExplorer />} />
       </Routes>
       <Footer />
     </Router>

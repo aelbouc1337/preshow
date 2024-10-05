@@ -7,9 +7,9 @@ import { IoMdClose } from "react-icons/io";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [menu, setMenu] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [search, setSearch] = useState("");
+  const [menu, setMenu] = useState(false); // state of mobile menu
+  const [searchOpen, setSearchOpen] = useState(false); // state of search bar
+  const [search, setSearch] = useState(""); //state of search query
 
   const nav = () => {
     setMenu(false);
@@ -17,6 +17,7 @@ const Navbar = () => {
   };
 
   const handleSumbit = () => {
+    setMenu(false);
     navigate(`/search/${search}`);
   };
 
@@ -45,14 +46,14 @@ const Navbar = () => {
       >
         <li
           onClick={nav}
-          className="w-full h-full flex items-center justify-center border-slate-500 border-b py-4 px-4 text-white text-xl"
+          className="w-full h-full cursor-pointer flex items-center justify-center border-slate-500 border-b py-4 px-4 text-white text-xl"
         >
           Movies
         </li>
-        <li className="w-full h-full flex items-center justify-center border-slate-500 border-b py-4 px-4 text-white text-xl">
+        <li className="w-full h-full cursor-pointer flex items-center justify-center border-slate-500 border-b py-4 px-4 text-white text-xl">
           TV Shows
         </li>
-        <li className="w-full h-full flex items-center justify-center border-slate-500 py-4 px-4 text-white text-xl">
+        <li className="w-full h-full cursor-pointer flex items-center justify-center border-slate-500 py-4 px-4 text-white text-xl">
           Profile
         </li>
       </ul>
@@ -66,18 +67,22 @@ const Navbar = () => {
           className="cursor-pointer"
         />
         <ul className="hidden text-lg lg:flex gap-6 items-center text-white">
-          <li onClick={() => navigate("/explorer")}>Movies</li>
-          <li>TV Shows</li>
-          <li onClick={() => setSearchOpen(!searchOpen)}>
+          <li className="cursor-pointer" onClick={() => navigate("/explorer")}>
+            Movies
+          </li>
+          <li className="cursor-pointer">TV Shows</li>
+          <li
+            className="cursor-pointer"
+            onClick={() => setSearchOpen(!searchOpen)}
+          >
             <CiSearch size={30} />
           </li>
-          <li className="w-12 h-12 border-4 border-slate-400 flex items-center justify-center rounded-full">
+          <li className="w-12 h-12 border-4 cursor-pointer border-slate-400 flex items-center justify-center rounded-full">
             <FaUser />
           </li>
         </ul>
-
         {/* Menu toggle button for mobile */}
-        <div className="flex gap-2 items-center justify-center">
+        <div className="flex  lg:hidden gap-2 items-center justify-center">
           <div
             onClick={() => setSearchOpen(true)}
             className="flex items-center text-white justify-center lg:hidden"
@@ -85,7 +90,7 @@ const Navbar = () => {
             <CiSearch size={30} />
           </div>
           <div
-            className="text-white lg:hidden cursor-pointer"
+            className="text-white cursor-pointer"
             onClick={() => setMenu(!menu)}
           >
             <CiMenuFries size={30} />

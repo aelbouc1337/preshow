@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   useGetMovieByIdQuery,
@@ -6,33 +6,33 @@ import {
   useGetMovieVideosQuery,
 } from "../state/api/apiSlice";
 import dayjs from "dayjs";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Modal } from "@mui/material";
 import { CiPlay1 } from "react-icons/ci";
 import PersonCard from "../components/UI/PersonCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import VideoCard from "../components/UI/VideoCard";
 import MovieSimilarAndRecommendations from "../components/Movie Similar Recommendations";
-
-export const slideLeft = (id) => {
-  const slider = document.getElementById(id);
-  slider.scrollLeft = slider.scrollLeft - 800;
-};
-
-export const slideRight = (id) => {
-  const slider = document.getElementById(id);
-  slider.scrollLeft = slider.scrollLeft + 800;
-};
+import Backdrop from "@mui/material/Backdrop";
+import { slideLeft, slideRight } from "../utils/sliders";
 
 const MoviePage = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const { id } = useParams();
   const { data: movie } = useGetMovieByIdQuery(id);
   const { data: movieCredits } = useGetMovieCreditsQuery(id);
   const { data: movieVideos } = useGetMovieVideosQuery(id);
 
+  // getting the trailer from videos
+  const trailer = movieVideos?.results?.filter(
+    (video) => video.type == "Trailer"
+  );
+  // getting the director from Credits
   const director = movieCredits?.crew.find(
     (crewMember) => crewMember.job === "Director"
   );
-
+  // getting one or more writer from credits
   const writers = movieCredits?.crew
     .filter((writer) => writer.job === "Writer")
     .map((writer) => writer.name);
@@ -105,12 +105,40 @@ const MoviePage = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-16 h-16 flex items-center justify-center  rounded-full border-2 border-white text-white">
+                <div
+                  onClick={() => setOpen(true)}
+                  className="flex items-center gap-3 cursor-pointer text-white hover:scale-105 ease-in-out duration-300"
+                >
+                  <div className="w-16  h-16 flex items-center justify-center  rounded-full border-2 ">
                     <CiPlay1 size={30} />
                   </div>
-                  <h4 className="text-white text-xl"> Watch Trailer</h4>
+                  <h4 className="text-xl"> Watch Trailer</h4>
                 </div>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  slots={{ backdrop: Backdrop }}
+                  slotProps={{
+                    backdrop: {
+                      timeout: 500,
+                    },
+                  }}
+                >
+                  {trailer && trailer.length > 0 ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${trailer[0]?.key}`}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute w-[90%] h-72 lg:w-[800px] lg:h-[560px] top-[50%] right-[50%] translate-x-[50%] -translate-y-[50%]"
+                    ></iframe>
+                  ) : (
+                    <div className="text-white">Trailer not available</div>
+                  )}
+                </Modal>
               </div>
 
               <section className="flex flex-col gap-2">
@@ -167,7 +195,7 @@ const MoviePage = () => {
               >
                 <div
                   onClick={() => slideLeft("topCast")}
-                  className="absolute top-[30%] z-30 text-black rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white opacity-40 hover:opacity-80 cursor-pointer flex items-center justify-center"
+                  className="absolute top-[30%] z-30 text-black rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white cursor-pointer flex items-center justify-center"
                 >
                   <MdChevronLeft size={30} />
                 </div>
@@ -176,7 +204,7 @@ const MoviePage = () => {
                 ))}
                 <div
                   onClick={() => slideRight("topCast")}
-                  className="absolute text-black top-[30%] right-0 z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white opacity-40 hover:opacity-80 cursor-pointer flex items-center justify-center"
+                  className="absolute text-black top-[30%] right-0 z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white cursor-pointer flex items-center justify-center"
                 >
                   <MdChevronRight size={30} />
                 </div>
@@ -201,7 +229,7 @@ const MoviePage = () => {
             >
               <div
                 onClick={() => slideLeft("videos")}
-                className="absolute top-[30%] z-30 text-black rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white opacity-40 hover:opacity-80 cursor-pointer flex items-center justify-center"
+                className="absolute top-[30%] z-30 text-black rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white cursor-pointer flex items-center justify-center"
               >
                 <MdChevronLeft size={30} />
               </div>
@@ -213,7 +241,7 @@ const MoviePage = () => {
 
               <div
                 onClick={() => slideRight("videos")}
-                className="absolute text-black top-[30%] right-0 z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white opacity-40 hover:opacity-80 cursor-pointer flex items-center justify-center"
+                className="absolute text-black top-[30%] right-0 z-30 rounded-full w-8 h-8 lg:w-11 lg:h-11 bg-white  cursor-pointer flex items-center justify-center"
               >
                 <MdChevronRight size={30} />
               </div>

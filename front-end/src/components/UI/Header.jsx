@@ -9,8 +9,9 @@ const Header = () => {
   const { data: trendingMovies } = useGetTrendingMoviesQuery("day");
   const imgName =
     trendingMovies?.results[getRandomInt(trendingMovies?.results.length)]
-      ?.backdrop_path;
-  const imgUrl = `https://image.tmdb.org/t/p/w1280${imgName}`;
+      ?.backdrop_path; // getting backDrops Randomly from trending Movies
+
+  const imgUrl = `https://image.tmdb.org/t/p/w1280${imgName}`; //Forming the URL Based on the backdrop-path
   return (
     <header
       className="relative flex flex-col gap-2 justify-center items-center text-white -mt-[5rem] w-full h-[600px] bg-cover bg-center"

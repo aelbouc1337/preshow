@@ -4,8 +4,8 @@ import MovieCard from "../components/UI/MovieCard";
 import GenreSelect from "../components/UI/GenreSelect";
 import SortSelect from "../components/UI/SortSelect";
 
-const Explorer = () => {
-  const [selected, setSelected] = useState("28,12"); // Initialize with null
+const MoviesExplorer = () => {
+  const [selected, setSelected] = useState("9648,53"); // Initialize with two types
   const [selectedSort, setSelectedSort] = useState(null);
 
   const [page, setPage] = useState(1);
@@ -64,14 +64,14 @@ const Explorer = () => {
 
   return (
     <div className="w-full my-10 justify-centers items-center flex flex-col gap-4 px-4 md:px-28 lg:px-[9%] bg-bg">
-      <div className="w-full items-end flex flex-col lg:flex-row gap-3 border">
+      <div className="w-full items-end flex flex-col lg:flex-row gap-3">
         <GenreSelect selected={selected} setSelected={setSelected} />
         <SortSelect
           selectedSort={selectedSort}
           setSelectedSort={setSelectedSort}
         />
       </div>
-      <div className="w-full h-full  grid lg:gap-8 lg:grid-cols-5 grid-cols-2">
+      <div className="w-full h-full  grid lg:gap-8 gap-y-4 gap-x-1 lg:grid-cols-5 grid-cols-2">
         {accumulatedResults?.map((item, index) => (
           <MovieCard key={index} movie={item} />
         ))}
@@ -87,4 +87,4 @@ const Explorer = () => {
   );
 };
 
-export default Explorer;
+export default MoviesExplorer;
