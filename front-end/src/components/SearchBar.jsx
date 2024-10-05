@@ -13,7 +13,10 @@ const SearchBar = () => {
     if (search.trim() != "") navigate(`/search/${search.trim()}`);
   };
   return (
-    <div className="z-20 flex lg:w-[60%] w-[90%] rounded-full overflow-hidden">
+    <form
+      onSubmit={navigateTo}
+      className="z-20 flex lg:w-[60%] w-[90%] rounded-full overflow-hidden"
+    >
       <input
         type="text"
         onChange={handleChange}
@@ -26,7 +29,7 @@ const SearchBar = () => {
       >
         search
       </button>
-    </div>
+    </form>
   );
 };
 
