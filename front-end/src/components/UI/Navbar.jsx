@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="relative z-50 bg-opacity-70 bg-bg w-full">
+    <nav className="relative z-50 bg-opacity-95 bg-bg w-full">
       {searchOpen && (
         <form
           onSubmit={handleSumbit}
